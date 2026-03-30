@@ -5,9 +5,9 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const gallery = document.querySelector(".gallery");
 
-const div = document.querySelector(".loader");
+const loaderEl = document.querySelector(".loader");
 
-export function createGallerys(images) {
+export function renderGallery(images) {
     const markup = images.map(createGallery).join('');
     gallery.innerHTML = markup;
     const lightbox = new SimpleLightbox('.gallery a', { 
@@ -30,9 +30,9 @@ function createGallery(image) {
 }
 
 export function showLoader() {
-    div.style.display = "block";
+    loaderEl.style.display = "block";
 }
 
 export function hideLoader() {
-    div.style.display = "none";
+    loaderEl.style.display = "none";
 }
