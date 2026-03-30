@@ -28,9 +28,6 @@ export function getImagesByQuery(query) {
         }  
         return hits;
     }).catch(error => {
-        if (!error.ok) {
-            throw new Error("error")
-        }
-        
+        throw new Error(error);
     });
 }

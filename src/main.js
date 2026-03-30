@@ -1,7 +1,9 @@
 
 import { getImagesByQuery } from "./js/pixabay-api.js";
 import { createGallerys, showLoader, hideLoader , clearGallery} from "./js/render-functions.js";
-
+import iziToast from "izitoast";
+// Додатковий імпорт стилів
+import "izitoast/dist/css/iziToast.min.css";
 
 const refs = {
     form: document.querySelector(".form"),
@@ -33,8 +35,12 @@ function onSubmitHandler(event) {
         console.log(value);
         createGallerys(value);
     }).catch (error => {
-        hideLoader();  
+        hideLoader();
+        iziToast.show({
+            title: 'Error',
+            message: 'Sorry, there are no images matching your search query. Please try again!'
+        }); 
     })
-
+    
     refs.form.reset();
 }

@@ -12,7 +12,6 @@ export function createGallerys(images) {
     gallery.innerHTML = markup;
     const lightbox = new SimpleLightbox('.gallery a', { 
         captionsData: "alt",
-        
     });
 
     lightbox.on("shown.simplelightbox", showLoader);
@@ -27,7 +26,7 @@ export function clearGallery() {
 }
 
 function createGallery(image) {
-    return `<li class="gallery-item" ><a href="${image.webformatURL}"><img class="gallery-image" src="${image.largeImageURL}" alt="${image.tags}"/></a></li>`
+    return `<li class="gallery-item" ><a href="${image.webformatURL}"><img class="gallery-image" src="${image.largeImageURL}" alt="${image.tags}"/><ul><li><h3>Likes<p>${likes}</p></h3></li><li><h3>Views<p>${views}</p></h3></li><li><h3>Comments<p>${comments}</p></h3></li><li><h3>Downloads<p>${downloads}</p></h3></li></ul></a></li>`
 }
 
 export function showLoader() {
