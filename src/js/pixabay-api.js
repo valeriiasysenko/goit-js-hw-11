@@ -8,20 +8,6 @@ export function getImagesByQuery(query) {
     const baseUrl = "https://pixabay.com";
     const endPoint = "/api/";
     const url = baseUrl + endPoint;
-
-    if (query === "") {
-        const controller = new AbortController();
-        axios.get(url, {
-            signal: controller.signal
-        }).then(function (response) {
-            iziToast.show({
-                title: 'Error',
-                message: 'Sorry, there are no images matching your search query. Please try again!'
-            }); 
-            
-        });
-        controller.abort()
-    }
     
     const params = {
         key: "55223791-ec5d17344899da05be039ab07",
@@ -32,7 +18,7 @@ export function getImagesByQuery(query) {
     }
 
     return axios.get(url, { params }).then(response => {
-        const hits = response.data.hits || undefined;
+        const hits = response.data.hits || [];
 
         if (hits.length === 0) {
             iziToast.show({

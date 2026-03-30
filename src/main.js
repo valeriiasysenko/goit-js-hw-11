@@ -22,12 +22,14 @@ function onSubmitHandler(event) {
     const dataForm = new FormData(event.target);
     const searchText = dataForm.get("search-text").trim();
     
-    // if (!searchText) {
-    //     iziToast.show({
-    //         title: 'Error',
-    //         message: 'Please try again!'
-    //     });  
-    // }
+    if (!searchText) {
+        iziToast.show({
+            title: 'Error',
+            message: 'Please try again!'
+        });  
+        return;
+    }
+    clearGallery();
     showLoader();
     getImagesByQuery(searchText).then(value => {
         hideLoader();

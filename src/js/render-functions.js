@@ -4,21 +4,16 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const gallery = document.querySelector(".gallery");
-
 const loaderEl = document.querySelector(".loader");
 
+const lightbox = new SimpleLightbox('.gallery a', { 
+     captionsData: "alt",
+});
+    
 export function renderGallery(images) {
     const markup = images.map(createGallery).join('');
-    gallery.innerHTML = markup;
-    const lightbox = new SimpleLightbox('.gallery a', { 
-        captionsData: "alt",
-    });
-
-    lightbox.on("shown.simplelightbox", showLoader);
-    lightbox.on("close.simplelightbox", hideLoader);
-    
+    gallery.insertAdjacentHTML("beforeend", markup);
     lightbox.refresh();
-
 }
 
 export function clearGallery() {
@@ -26,7 +21,22 @@ export function clearGallery() {
 }
 
 function createGallery(image) {
-    return `<li class="gallery-item" ><a href="${image.largeImageURL}"><img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}"/><ul><li><h3>Likes<p>${image.likes}</p></h3></li><li><h3>Views<p>${image.views}</p></h3></li><li><h3>Comments<p>${image.comments}</p></h3></li><li><h3>Downloads<p>${image.downloads}</p></h3></li></ul></a></li>`
+    return `
+    <li class="gallery-item">
+        <a href="${image.largeImageURL}">
+            <img 
+                class="gallery-image" 
+                src="${image.webformatURL}" 
+                alt="${image.tags}"
+            />
+        </a>
+        <ul>
+            <li><h3>Likes</h3><p>${image.likes}</p></li>
+            <li><h3>Views</h3><p>${image.views}</p></li>
+            <li><h3>Comments</h3><p>${image.comments}</p></li>
+            <li><h3>Downloads</h3><p>${image.downloads}</p></li>
+        </ul>
+    </li>`;
 }
 
 export function showLoader() {
