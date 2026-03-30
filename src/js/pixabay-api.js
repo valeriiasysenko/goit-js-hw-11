@@ -27,5 +27,10 @@ export function getImagesByQuery(query) {
             });  
         }  
         return hits;
-    }).catch(error => error);
+    }).catch(error => {
+        if (!error.ok) {
+            throw new Error("error")
+        }
+        
+    });
 }

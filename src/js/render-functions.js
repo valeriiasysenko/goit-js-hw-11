@@ -5,7 +5,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const gallery = document.querySelector(".gallery");
 
-const div = document.querySelector("div");
+const div = document.querySelector(".loader");
 
 export function createGallerys(images) {
     const markup = images.map(createGallery).join('');
@@ -15,11 +15,15 @@ export function createGallerys(images) {
         
     });
 
-    lightbox.on("shown.simplelightbox", showLoader());
-    lightbox.on("close.simplelightbox", hideLoader());
+    lightbox.on("shown.simplelightbox", showLoader);
+    lightbox.on("close.simplelightbox", hideLoader);
     
     lightbox.refresh();
 
+}
+
+export function clearGallery() {
+    gallery.innerHTML = "";
 }
 
 function createGallery(image) {
