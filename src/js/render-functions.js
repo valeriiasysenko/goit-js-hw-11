@@ -11,6 +11,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 });
     
 export function renderGallery(images) {
+    hideLoader();
     const markup = images.map(createGallery).join('');
     gallery.insertAdjacentHTML("beforeend", markup);
     lightbox.refresh();

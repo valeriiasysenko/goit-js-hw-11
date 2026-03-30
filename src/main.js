@@ -27,10 +27,12 @@ function onSubmitHandler(event) {
             title: 'Error',
             message: 'Please try again!'
         });  
+        clearGallery();
         return;
     }
-    clearGallery();
     showLoader();
+    clearGallery();
+    
     getImagesByQuery(searchText).then(value => {
         hideLoader();
         console.log(value);

@@ -18,15 +18,16 @@ export function getImagesByQuery(query) {
     }
 
     return axios.get(url, { params }).then(response => {
-        const hits = response.data.hits || [];
+        const hits = response.data.hits;
 
         if (hits.length === 0) {
             iziToast.show({
                 title: 'Error',
                 message: 'Sorry, there are no images matching your search query. Please try again!'
-            });  
+            }); 
+           return;
         }  
-        return  hits || [];
+        return  hits;
     }).catch(error => {
         throw error;
     });
