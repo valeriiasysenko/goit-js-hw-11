@@ -26,7 +26,7 @@ export function clearGallery() {
 }
 
 function createGallery(image) {
-    return `<li class="gallery-item" ><a href="${image.webformatURL}"><img class="gallery-image" src="${image.largeImageURL}" alt="${image.tags}"/><ul><li><h3>Likes<p>${likes}</p></h3></li><li><h3>Views<p>${views}</p></h3></li><li><h3>Comments<p>${comments}</p></h3></li><li><h3>Downloads<p>${downloads}</p></h3></li></ul></a></li>`
+    return `<li class="gallery-item" ><a href="${image.largeImageURL}"><img class="gallery-image" src="${image.webformatURL}" alt="${image.tags}"/><ul><li><h3>Likes<p>${image.likes}</p></h3></li><li><h3>Views<p>${image.views}</p></h3></li><li><h3>Comments<p>${image.comments}</p></h3></li><li><h3>Downloads<p>${image.downloads}</p></h3></li></ul></a></li>`
 }
 
 export function showLoader() {
