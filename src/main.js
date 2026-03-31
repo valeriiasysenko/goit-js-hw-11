@@ -8,7 +8,7 @@ import "izitoast/dist/css/iziToast.min.css";
 const refs = {
     form: document.querySelector(".form"),
 }
-
+clearGallery();
 refs.form.addEventListener("submit", onSubmitHandler);
 
 function onSubmitHandler(event) {
@@ -28,24 +28,27 @@ function onSubmitHandler(event) {
         clearGallery();
         return;
     }
-   
+    showLoader();
     getImagesByQuery(searchText).then(value => {
         clearGallery();
         setTimeout(() => {
             renderGallery(value);
             if (value.length === 0) {
-            iziToast.show({
-                title: 'Error',
-                message: 'Sorry, there are no images matching your search query. Please try again!'
-            });
-            return;
-        }
-        }, 1000);
-    }).catch (error => {
+                iziToast.show({
+                    title: 'Error',
+                    message: 'Sorry, there are no images matching your search query. Please try again!'
+                });
+                return;
+            }
+        }, 800);
+    }).catch(error => {
         iziToast.show({
             title: 'Error',
             message: 'Something went wrong!'
         });
-    })  
+        clearGallery();
+    }).finally(() => {
+        setTimeout(hideLoader,900);
+    });
     refs.form.reset();
 }

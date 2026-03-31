@@ -6,7 +6,6 @@ import "izitoast/dist/css/iziToast.min.css";
 import { hideLoader, showLoader } from "./render-functions";
 
 export function getImagesByQuery(query) {
-    showLoader();
     const baseUrl = "https://pixabay.com";
     const endPoint = "/api/";
     const url = baseUrl + endPoint;
@@ -19,7 +18,6 @@ export function getImagesByQuery(query) {
         safesearch: true,
     }
     return axios.get(url, { params }).then(response => {
-        setTimeout(hideLoader,1000);
         const hits = response.data.hits;
         console.log(response.data); 
         return hits || [];
