@@ -9,12 +9,6 @@ const refs = {
     form: document.querySelector(".form"),
 }
 
-clearGallery();
-
-document.addEventListener("DOMContentLoaded", () => {
-    hideLoader();
-});
-
 refs.form.addEventListener("submit", onSubmitHandler);
 
 function onSubmitHandler(event) {
@@ -23,27 +17,35 @@ function onSubmitHandler(event) {
     const searchText = dataForm.get("search-text").trim();
     
     if (!searchText) {
-        iziToast.show({
+        showLoader();
+        setTimeout(() => {
+            hideLoader();
+            iziToast.show({
             title: 'Error',
             message: 'Please try again!'
-        });  
+        });
+        }, 1000);  
         clearGallery();
         return;
     }
-    showLoader();
-    clearGallery();
-    
+   
     getImagesByQuery(searchText).then(value => {
-        hideLoader();
-        console.log(value);
-        renderGallery(value);
+        clearGallery();
+        setTimeout(() => {
+            renderGallery(value);
+            if (value.length === 0) {
+            iziToast.show({
+                title: 'Error',
+                message: 'Sorry, there are no images matching your search query. Please try again!'
+            });
+            return;
+        }
+        }, 1000);
     }).catch (error => {
-        hideLoader();
         iziToast.show({
             title: 'Error',
-            message: 'Sorry, there are no images matching your search query. Please try again!'
-        }); 
-    })
-    
+            message: 'Something went wrong!'
+        });
+    })  
     refs.form.reset();
 }

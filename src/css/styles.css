@@ -72,13 +72,13 @@
   gap: 24px;
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin-bottom: 24px;
 }
 
 .gallery-item {
-  width: 360px;
-  height: 200px;
-  width: calc((100% - 2 * 24px)/3);
+  display: flex;
+  flex-direction: column;
+  width: calc((100% - 4 * 24px)/5);
 }
 
 .gallery-image {
@@ -90,3 +90,39 @@
 .form{
   margin-bottom: 24px;
 }
+
+
+.list-info {
+  display: flex;
+  border-bottom: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #808080;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  gap: 17px;
+  justify-content: center;
+}
+
+.item-info {
+  width: 48px;
+  height: 40px;
+} 
+
+.item-title {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.item-text {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 200%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+} 

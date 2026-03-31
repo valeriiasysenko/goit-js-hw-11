@@ -3,8 +3,10 @@ import axios from "axios";
 import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
+import { hideLoader, showLoader } from "./render-functions";
 
 export function getImagesByQuery(query) {
+    showLoader();
     const baseUrl = "https://pixabay.com";
     const endPoint = "/api/";
     const url = baseUrl + endPoint;
@@ -16,19 +18,19 @@ export function getImagesByQuery(query) {
         orientation: "horizontal",
         safesearch: true,
     }
-
     return axios.get(url, { params }).then(response => {
+        setTimeout(hideLoader,1000);
         const hits = response.data.hits;
-
-        if (hits.length === 0) {
-            iziToast.show({
-                title: 'Error',
-                message: 'Sorry, there are no images matching your search query. Please try again!'
-            }); 
-           return;
-        }  
-        return  hits;
+        console.log(response.data); 
+        return hits || [];
+        
     }).catch(error => {
+        
+        console.log(error);
+        iziToast.show({
+            title: 'Error',
+            message: error,
+        }); 
         throw error;
     });
 }

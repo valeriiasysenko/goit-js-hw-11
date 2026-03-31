@@ -4,14 +4,13 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const gallery = document.querySelector(".gallery");
-const loaderEl = document.querySelector(".loader");
+const loaderEl = document.querySelector(".js-loader");
 
 const lightbox = new SimpleLightbox('.gallery a', { 
-     captionsData: "alt",
+    captionsData: "alt",
 });
     
 export function renderGallery(images) {
-    hideLoader();
     const markup = images.map(createGallery).join('');
     gallery.insertAdjacentHTML("beforeend", markup);
     lightbox.refresh();
@@ -31,19 +30,19 @@ function createGallery(image) {
                 alt="${image.tags}"
             />
         </a>
-        <ul>
-            <li><h3>Likes</h3><p>${image.likes}</p></li>
-            <li><h3>Views</h3><p>${image.views}</p></li>
-            <li><h3>Comments</h3><p>${image.comments}</p></li>
-            <li><h3>Downloads</h3><p>${image.downloads}</p></li>
-        </ul>
+        <ul class="list-info">
+            <li class="item-info"><h3 class="item-title">Likes</h3><p class="item-text">${image.likes}</p></li>
+            <li class="item-info"><h3 class="item-title">Views</h3><p class="item-text">${image.views}</p></li>
+            <li class="item-info"><h3 class="item-title">Comments</h3><p class="item-text">${image.comments}</p></li>
+            <li class="item-info"><h3 class="item-title">Downloads</h3><p class="item-text">${image.downloads}</p></li>
+        </ul>   
     </li>`;
 }
 
 export function showLoader() {
-    loaderEl.style.display = "block";
+    loaderEl.classList.add("loader");
 }
 
 export function hideLoader() {
-    loaderEl.style.display = "none";
+    loaderEl.classList.remove("loader");
 }
