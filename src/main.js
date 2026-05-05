@@ -29,8 +29,9 @@ function onSubmitHandler(event) {
         return;
     }
     showLoader();
+    clearGallery();
     getImagesByQuery(searchText).then(value => {
-        clearGallery();
+        // clearGallery();
         setTimeout(() => {
             renderGallery(value);
             if (value.length === 0) {

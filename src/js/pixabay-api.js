@@ -23,7 +23,6 @@ export function getImagesByQuery(query) {
         return hits || [];
         
     }).catch(error => {
-        
         console.log(error);
         iziToast.show({
             title: 'Error',
