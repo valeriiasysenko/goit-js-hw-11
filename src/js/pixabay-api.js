@@ -3,9 +3,9 @@ import axios from "axios";
 import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
-import { hideLoader, showLoader } from "./render-functions";
 
 export function getImagesByQuery(query) {
+    
     const baseUrl = "https://pixabay.com";
     const endPoint = "/api/";
     const url = baseUrl + endPoint;
@@ -26,7 +26,7 @@ export function getImagesByQuery(query) {
         console.log(error);
         iziToast.show({
             title: 'Error',
-            message: error,
+            message: error.message,
         }); 
         throw error;
     });

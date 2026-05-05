@@ -15,41 +15,53 @@ function onSubmitHandler(event) {
     event.preventDefault();
     const dataForm = new FormData(event.target);
     const searchText = dataForm.get("search-text").trim();
-    
+    showLoader();
     if (!searchText) {
-        showLoader();
-        setTimeout(() => {
-            hideLoader();
-            iziToast.show({
+        // showLoader();
+        // setTimeout(() => {
+        //     hideLoader();
+        //     iziToast.show({
+        //     title: 'Error',
+        //     message: 'Please try again!'
+        // });
+        // }, 1000);  
+        iziToast.show({
             title: 'Error',
             message: 'Please try again!'
         });
-        }, 1000);  
         clearGallery();
         return;
     }
-    showLoader();
     clearGallery();
     getImagesByQuery(searchText).then(value => {
-        // clearGallery();
-        setTimeout(() => {
-            renderGallery(value);
-            if (value.length === 0) {
-                iziToast.show({
-                    title: 'Error',
-                    message: 'Sorry, there are no images matching your search query. Please try again!'
-                });
-                return;
-            }
-        }, 800);
+        
+        if (value.length === 0) {
+            iziToast.show({
+                title: 'Error',
+                message: 'Sorry, there are no images matching your search query. Please try again!'
+            });
+            return;
+        }
+        renderGallery(value);
+        // setTimeout(() => {
+        //     renderGallery(value);
+        //     if (value.length === 0) {
+        //         iziToast.show({
+        //             title: 'Error',
+        //             message: 'Sorry, there are no images matching your search query. Please try again!'
+        //         });
+        //         return;
+        //     }
+        // }, 800);
     }).catch(error => {
         iziToast.show({
             title: 'Error',
             message: 'Something went wrong!'
         });
-        clearGallery();
+        // clearGallery();
     }).finally(() => {
-        setTimeout(hideLoader,900);
+        hideLoader();
+        // setTimeout(hideLoader,900);
     });
     refs.form.reset();
 }
