@@ -30,11 +30,13 @@ function onSubmitHandler(event) {
             message: 'Please try again!'
         });
         clearGallery();
+        hideLoader();
         return;
+       
     }
+    
     clearGallery();
     getImagesByQuery(searchText).then(value => {
-        
         if (value.length === 0) {
             iziToast.show({
                 title: 'Error',
@@ -60,8 +62,7 @@ function onSubmitHandler(event) {
         });
         // clearGallery();
     }).finally(() => {
-        hideLoader();
-        // setTimeout(hideLoader,900);
+          hideLoader();
     });
     refs.form.reset();
 }
